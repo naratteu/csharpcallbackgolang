@@ -1,24 +1,14 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-public delegate void CallbackDelegate();
+Invoke(() => Console.WriteLine("Hello from C# delegate!"));
+Wrapper.Invoke(() => Console.WriteLine("Hello from C# delegate! 2"));
 
-public static class Wrapper
+[DllImport("csharpcallbackgolang.so", CallingConvention = CallingConvention.Cdecl)]
+static extern void Invoke(Action callback);
+
+static partial class Wrapper
 {
-    [DllImport("csharpcallbackgolang.so", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void RegisterCallback2(CallbackDelegate callback);
-}
-
-class Program
-{
-    static void Main()
-    {
-        CallbackDelegate callback = new CallbackDelegate(Hello);
-        Wrapper.RegisterCallback2(callback);
-    }
-
-    public static void Hello()
-    {
-        Console.WriteLine("Hello from C# delegate!");
-    }
+    [LibraryImport("csharpcallbackgolang.so")]
+    //[UnmanagedCallConv(CallConvs = new Type[] { typeof(System.Runtime.CompilerServices.CallConvCdecl) })]
+    public static partial void Invoke(Action callback);
 }

@@ -1,20 +1,14 @@
 package main
 
 /*
-#include <stdlib.h>
-
-typedef void (*CallbackDelegate)();
-
-static inline void RegisterCallback(CallbackDelegate callback) {
-    callback();
-}
+typedef void (*Action)();
+static void invoke(Action callback) { callback(); }
 */
 import "C"
 
-func main() {
-}
+func main() {}
 
-//export RegisterCallback2
-func RegisterCallback2(callback C.CallbackDelegate) {
-	C.RegisterCallback(callback)
+//export Invoke
+func Invoke(callback C.Action) {
+	C.invoke(callback)
 }
