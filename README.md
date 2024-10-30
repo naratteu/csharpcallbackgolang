@@ -22,6 +22,7 @@ dotnet publish -o build
 
 ## 도보시오
 
+- https://github.com/monkey0506/native-generic-delegates
 - https://github.com/johncburns1/Golang-.NET-SharedC
 - https://github.com/GridProtectionAlliance/go2cs
 - rust ffi cgo etc..
